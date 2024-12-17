@@ -15,11 +15,6 @@ contract CodattaBuildKeyEliteHunter is Initializable, ERC721Upgradeable, Ownable
     string private _defaultURI;
     uint256 private _currentTokenId;
 
-    struct MintParam {
-        address to;
-        uint256 tokenId;
-    }
-
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -31,15 +26,16 @@ contract CodattaBuildKeyEliteHunter is Initializable, ERC721Upgradeable, Ownable
         __UUPSUpgradeable_init();
     }
 
-    function mint(address to, uint256 tokenId) public onlyOwner {
+    function mint(address to) public onlyOwner {
         require(balanceOf(to) == 0, "CodattaBuildKeyEliteHunter: one address can only own one token");
         _currentTokenId++;
-        _mint(to, tokenId);
+        _mint(to, _currentTokenId);
+        addressToTokenId[to] = _currentTokenId;
     }
 
-    function mintBatch(MintParam[] calldata params) public {
+    function mintBatch(address[] calldata params) public {
         for (uint256 i = 0; i < params.length; ) {
-            mint(params[i].to, params[i].tokenId);
+            mint(params[i]);
             unchecked {
                 ++i;
             }

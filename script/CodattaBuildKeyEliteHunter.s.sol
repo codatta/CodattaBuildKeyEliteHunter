@@ -19,6 +19,7 @@ contract CodattaBuildKeyEliteHunterUUPS is Script {
         );
 
         console.log("uupsProxy deploy at %s", uupsProxy);
+        // Upgrades.upgradeProxy(0xd6DEaa299379Dc902aaB05858138dC776706F1b3, "CodattaBuildKeyEliteHunter.sol", "");
 
         vm.stopBroadcast();
     }

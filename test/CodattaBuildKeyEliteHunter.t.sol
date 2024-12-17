@@ -31,14 +31,14 @@ contract CodattaBuildKeyEliteHunterTest is Test {
 
     function testMint() public {
         vm.prank(CHEATCODE_ADDRESS);
-        instance.mint(CHEATCODE_ADDRESS, 1);
+        instance.mint(CHEATCODE_ADDRESS);
         assertEq(instance.ownerOf(1), CHEATCODE_ADDRESS);
 
         vm.prank(CHEATCODE_ADDRESS);
         vm.expectRevert(bytes("CodattaBuildKeyEliteHunter: one address can only own one token"));
-        instance.mint(CHEATCODE_ADDRESS, 2);
+        instance.mint(CHEATCODE_ADDRESS);
 
         vm.prank(CHEATCODE_ADDRESS);
-        instance.mint(SOME_ADDRESS, 2);
+        instance.mint(SOME_ADDRESS);
     }
 }
