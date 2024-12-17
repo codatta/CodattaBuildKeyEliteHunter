@@ -33,12 +33,12 @@ contract CodattaBuildKeyEliteHunter is Initializable, ERC721Upgradeable, Ownable
 
     function mint(address to, uint256 tokenId) public onlyOwner {
         require(balanceOf(to) == 0, "CodattaBuildKeyEliteHunter: one address can only own one token");
+        _currentTokenId++;
         _mint(to, tokenId);
     }
 
     function mintBatch(MintParam[] calldata params) public {
         for (uint256 i = 0; i < params.length; ) {
-            _currentTokenId++;
             mint(params[i].to, params[i].tokenId);
             unchecked {
                 ++i;
